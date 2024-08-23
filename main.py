@@ -18,6 +18,10 @@ import ctypes
 import time
 import requests
 import shutil
+import imaplib
+import sys
+from googlesearch import search
+from dotenv import load_dotenv
 from twilio.rest import Client
 from clint.textui import progress
 from ecapture import ecapture as ec
@@ -25,7 +29,7 @@ from bs4 import BeautifulSoup
 import win32com.client as wincl
 from urllib.request import urlopen
 
-engine = pyttsx3.init('sapi5')  # SAPI5 (Speech Application Programming Interface) by Microsoft for Windows.
+engine = pyttsx3.init()  # SAPI5 (Speech Application Programming Interface) by Microsoft for Windows.
 voices = engine.getProperty('voices') 
 engine.setProperty('voice', voices[1].id)  # 1 = female voice, 0 = male voice
 
@@ -45,7 +49,7 @@ def wishMe():
         speak("Good Evening!") 
 
     assname = "assistant"
-    speak("I am an assistant")
+    speak("I am your AI helper")
     speak(assname)
 
 def username():
@@ -81,24 +85,39 @@ def takeCommand():
     
     return query
 
-def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    
-    # Use environment variables or a secure method to handle sensitive information.
-    EMAIL = os.getenv('EMAIL')  # Get the email from environment variables
-    PASSWORD = os.getenv('PASSWORD')  # Get the password from environment variables
-    
-    server.login(EMAIL, PASSWORD)
-    server.sendmail(EMAIL, to, content)
-    server.close()
-
 if __name__ == '__main__':
     clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
     clear()
     wishMe()
     username()
+    
+    while True:
+        query = takeCommand().lower()
+        
+        if 'wikipedia' in query:
+            speak('Searching Wikipedia...')
+            query = query.replace("wikipedia", "")
+            results = wikipedia.summary(query, sentences = 3)
+            speak("According to Wikipedia")
+            print(results)
+            speak(results)
+            
+        elif 'open youtube' in query:
+            speak("Here you go to Youtube\n")
+            webbrowser.open("youtube.com")
+ 
+        elif 'open google' in query:
+            speak("Here you go to Google\n")
+            webbrowser.open("google.com")
+            
+        elif 'joke' in query:
+            speak(pyjokes.get_joke())
+            
+        elif "will you be my gf" in query or "will you be my bf" in query:   
+            speak("touch some grass")
+            
+        elif 'bye' in query:
+            sys.exit()
 
 
 
