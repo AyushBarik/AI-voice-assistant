@@ -13,6 +13,8 @@ times = {
 "Elder" :  math.ceil((cont / 90))*10 + 300
 }
 
+# 4840 2100 1920 2720 11k
+
 for var_name, value in times.items():
     res = value / 60
     hours = int(res)
