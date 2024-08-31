@@ -1,24 +1,12 @@
-import subprocess
-import wolframalpha
+
 import pyttsx3
-import tkinter
-import json
-import random
-import operator
 import speech_recognition as sr
 import datetime
 import wikipedia
 import webbrowser
 import os
-import winshell
 import pyjokes
-import feedparser
-import smtplib
-import ctypes
-import time
-import requests
 import shutil
-import imaplib
 import sys
 from googlesearch import search
 from dotenv import load_dotenv
