@@ -37,7 +37,7 @@ def wishMe():
         speak("Good Evening Sir!") 
 
     assname = "assistant"
-    speak("I am your Assitant Luna!")
+    speak("I'm your intelligent Assistant Luna!")
     speak(assname)
 
 def username():
